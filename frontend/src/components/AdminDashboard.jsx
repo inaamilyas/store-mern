@@ -14,11 +14,11 @@ const AdminDashboard = ({
   user,
 }) => {
   const [activeTab, setActiveTab] = useState('storeManagers');
-  const [isAdmin, setIsAdmin] = useState(user.role === 'ADMIN');
+  const [isAdmin, setIsAdmin] = useState(user?.role === 'admin');
 
   useEffect(() => {
-    setIsAdmin(user.role === 'ADMIN');
-  }, []);
+    setIsAdmin(user?.role === 'admin');
+  }, [user]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">

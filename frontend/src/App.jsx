@@ -100,7 +100,7 @@ const App = () => {
 
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
     localStorage.removeItem('user');
   };
 
@@ -186,12 +186,13 @@ const App = () => {
     fetchStores();
     fetchManagers();
     fetchWalkinLogs();
-  }, []);
+  }, [user]);
 
   return (
     <div className="font-sans antialiased">
-      {!user.role && <Login setUser={setUser} />}
-      {user.role === 'ADMIN' && (
+      {!user ? (
+        <Login setUser={setUser} />
+      ) : (
         <AdminDashboard
           onLogout={handleLogout}
           stores={stores}
@@ -205,6 +206,7 @@ const App = () => {
           user={user}
         />
       )}
+
       {/* {user.role === 'manager' && (
         <StoreManagerPortal
           onLogout={handleLogout}

@@ -20,16 +20,28 @@ const Login = ({ setUser }) => {
         },
       );
 
+      console.log('====================================');
+      console.log('response', response);
+      console.log('====================================');
+
       const { token } = response.data;
 
       // ✅ Decode token to get user info
       const decoded = jwtDecode(token);
-      console.log('decoded', decoded);
+      console.log('decoded', decoded, decoded.userId, decoded.role);
 
       const user = decoded;
 
+      console.log('====================================');
+      console.log(user);
+      console.log('====================================');
+
       // Optional: Store token for future API calls
       localStorage.setItem('token', token);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ id: decoded.userId, role: decoded.role }),
+      );
       setUser(user);
 
       // if (role === 'admin') {
